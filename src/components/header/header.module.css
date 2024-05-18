@@ -1,0 +1,19 @@
+.header {
+  padding: 2rem 0 2rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  width: 100%;
+  background-color: var(--mid-color);
+}
+
+.header > button {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0 0 0 1.5rem;
+  background-color: transparent;
+  border: 0rem;
+  cursor: pointer;
+  color: var(--main-color);
+}
