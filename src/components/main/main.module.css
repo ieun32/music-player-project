@@ -1,0 +1,59 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0 2rem 0;
+  width: 90%;
+}
+
+.section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 1.5rem;
+}
+
+.section:hover {
+  background-color: var(--mid-color);
+}
+
+.section > button {
+  cursor: pointer;
+  background-color: transparent;
+  border: 0rem;
+  font-size: 3rem;
+  color: var(--white-color)
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+}
+
+.info > img {
+  width: 5rem;
+  height: 5rem;
+  overflow: clip;
+  border-radius: 1.5rem;
+}
+
+.info > span {
+  display: flex;
+  flex-direction: column;
+  margin-left: 2rem;
+}
+
+.info > span > h1 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.info > span > h2 {
+  opacity: 50%;
+}
