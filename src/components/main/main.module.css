@@ -20,7 +20,7 @@
   background-color: var(--mid-color);
 }
 
-.section > button {
+.section > a {
   cursor: pointer;
   background-color: transparent;
   border: 0rem;

@@ -4,6 +4,7 @@
   --back-color: #181818;
   --mid-color: #242424;
   --ligth-color: #5a5a5a;
+  --hover-color: #999999;
   --white-color: #fafafa;
 }
 
@@ -16,5 +17,4 @@
   height: 100vh;
   color: var(--white-color);
   background-color: var(--back-color);
-  overflow: hidden;
 }

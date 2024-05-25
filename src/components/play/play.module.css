@@ -1,6 +1,18 @@
 .main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: auto;
+}
+
+.iframe {
+  width: 100%;
+  height: 38rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-top: 2rem;
 }
 
 .album {
@@ -30,7 +42,23 @@
   margin-top: 1rem;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--ligth-color);
+  color: var(--white-color);
+}
+
+.album > button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  background-color: var(--mid-color);
+  color: var(--main-color);
+  font-size: 1rem;
+  font-weight: 600;
+  border: 0rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.album > button:hover {
+  opacity: 0.8;
 }
 
 .lyrics {
@@ -71,11 +99,17 @@
   align-items: center;
 }
 
-.control>input {
+.control> label {
   width: 90%;
 }
 
+.control> label > input {
+  width: 100%;
+  margin-top: 1rem;
+}
+
 .control>div>button {
+  margin-top: 1rem;
   background-color: transparent;
   color: var(--white-color);
   font-size: 3rem;
@@ -98,6 +132,7 @@
   /* New additions */
   height: 6px;
   background: var(--mid-color);
+  accent-color: var(--white-color);
 }
 
 /* Thumb: webkit */
@@ -111,9 +146,6 @@
   background-color: var(--main-color);
   border-radius: 50%;
   border: none;
-
-  /* box-shadow: -407px 0 0 400px var(--main-color); emove this line */
-  transition: .2s ease-in-out;
 }
 
 /* Thumb: Firefox */
@@ -123,9 +155,6 @@
   background-color: var(--main-color);
   border-radius: 50%;
   border: none;
-
-  /* box-shadow: -407px 0 0 400px var(--main-color); emove this line */
-  transition: .2s ease-in-out;
 }
 
 /* 스크롤바 */

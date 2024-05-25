@@ -4,7 +4,14 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ["eslint:recommended", "plugin:prettier/recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:prettier/recommended",
+    "plugin:css-modules/recommended",
+    "plugin:jsdoc/recommended-error",
+    "plugin:json/recommended-legacy",
+    "plugin:fp/recommended",
+  ],
   // 운영체제 별로 다른 개행 문자 자동 인식
   rules: {
     "prettier/prettier": [
@@ -13,7 +20,10 @@ module.exports = {
         endOfLine: "auto",
       },
     ],
+    "css-modules/no-unused-class": [2, { camelCase: true }],
+    "css-modules/no-undef-class": [2, { camelCase: true }],
   },
+  plugins: ["prettier", "css-modules", "jsdoc", "json", "fp"],
   // ESM 사용 가능하도록
   parserOptions: {
     ecmaVersion: "latest",

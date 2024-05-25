@@ -1,8 +1,11 @@
 import * as styles from "../components/play/play.module.css";
 import * as tags from "../constants/tags";
 import { navigate } from "./route";
+import musics from "./musics";
 
-// 클릭 이벤트 리스너
+/**
+ * 클릭 이벤트 리스너
+ */
 export function listenClickEvent() {
   let rangeInterval; // range 값을 증가시키는 interval
 
@@ -10,9 +13,7 @@ export function listenClickEvent() {
     // 라우트 관련
     if (event.target.matches("[data-navigate]")) {
       const path = event.target.dataset.navigate;
-      const state = { path };
-      history.pushState(state, "", path);
-      navigate(state);
+      navigate(path);
       clearInterval(rangeInterval);
     }
 
@@ -45,33 +46,39 @@ export function listenClickEvent() {
 
     // 이전 노래 버튼
     if (event.target.matches("#prevBtn")) {
-      navigateBtnHandler();
+      prevBtnHandler();
       clearInterval(rangeInterval);
     }
 
     // 다음 노래 버튼
     if (event.target.matches("#nextBtn")) {
-      navigateBtnHandler();
+      nextBtnHandler();
       clearInterval(rangeInterval);
     }
 
-    // 가사 클릭
-    if (event.target.matches("[data-time]")) {
-      const time = event.target.dataset.time;
+    // 가사 span 클릭
+    if (event.target.matches(".lyric-text")) {
+      const li = event.target.closest("li")
+      const time = li.dataset.time;
       tags.$inputRange[0].value = parseInt(time, 10);
       handleInputEvent(parseInt(tags.$inputRange[0].value, 10));
     }
   });
 }
 
-// 뒤로가기, 앞으로 가기 이벤트 리스너
+/**
+ * popstate 이벤트 리스너
+ * 뒤로가기, 앞으로 가기 버튼을 눌렀을 때 발생하는 이벤트
+ */
 export function listenPopStateEvent() {
   window.addEventListener("popstate", (event) => {
-    navigate(event.state);
+    navigate(event.state.path);
   });
 }
 
-// input range value 변경 이벤트 리스너
+/**
+ * input range 이벤트 리스너
+ */
 export function listenRangeEvent() {
   document.addEventListener("input", (event) => {
     if (event.target.matches("input[type='range']")) {
@@ -80,7 +87,10 @@ export function listenRangeEvent() {
   });
 }
 
-// input range 이벤트 핸들러
+/**
+ * input range 이벤트 핸들러
+ * @param {number} value input range의 value 값
+ */
 function handleInputEvent(value) {
   const lyricTags = document.querySelectorAll("[data-time]");
   const targetTag = document.querySelector(`[data-time='${value}']`);
@@ -96,7 +106,9 @@ function handleInputEvent(value) {
   setStyleOfRange(value, parseInt(tags.$inputRange[0].max, 10));
 }
 
-// 활성화 된 가사 태그가 화면 중앙에 위치하도록 스크롤 조정하는 함수
+/**
+ * 현재 활성화된 가사 태그가 화면 중앙에 위치하도록 스크롤 조정하는 함수
+ */
 function scrollToCurrentTag() {
   const currentTag = document.querySelector(`.${styles.current}`);
   if (currentTag) {
@@ -104,6 +116,11 @@ function scrollToCurrentTag() {
   }
 }
 
+/**
+ * input range의 style을 변경하는 함수
+ * @param {number} cur input range의 value 값
+ * @param {number} max input range의 max 값
+ */
 function setStyleOfRange(cur, max) {
   const progress = (cur / max) * 100;
   const currentTag = document.querySelector(`.${styles.rangeTrack}`);
@@ -112,16 +129,38 @@ function setStyleOfRange(cur, max) {
   }
 }
 
-function navigateBtnHandler() {
+/**
+ * 이전 버튼 핸들러
+ * 첫번째 노래일 경우 마지막 노래로 이동, 그 외에는 이전 노래로 이동
+ */
+function prevBtnHandler() {
   const titleTag = document.querySelector(`#title`);
   const title = titleTag.innerText;
-  if (title === "summer") {
-    const state = { path: "save" };
-    history.pushState(state, "", "save");
-    navigate(state);
-  } else {
-    const state = { path: "summer" };
-    history.pushState(state, "", "summer");
-    navigate(state);
-  }
+  musics.forEach((music, index) => {
+    if (music.title === title) {
+      if (index === 0) {
+        navigate(musics[musics.length - 1].navigate);
+      } else {
+        navigate(musics[index - 1].navigate);
+      }
+    }
+  });
+}
+
+/**
+ * 다음 버튼 핸들러
+ * 마지막 노래일 경우 첫번째 노래로 이동, 그 외에는 다음 노래로 이동
+ */
+function nextBtnHandler() {
+  const titleTag = document.querySelector(`#title`);
+  const title = titleTag.innerText;
+  musics.forEach((music, index) => {
+    if (music.title === title) {
+      if (index === musics.length - 1) {
+        navigate(musics[0].navigate);
+      } else {
+        navigate(musics[index + 1].navigate);
+      }
+    }
+  });
 }

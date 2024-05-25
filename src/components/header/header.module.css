@@ -1,9 +1,9 @@
 .header {
   padding: 2rem 0 2rem 0.5rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
   width: 100%;
   background-color: var(--mid-color);
 }
@@ -16,4 +16,20 @@
   border: 0rem;
   cursor: pointer;
   color: var(--main-color);
+}
+
+.header > ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  margin-left: 2rem;
+}
+
+.header > ul > li {
+  margin-right: 0.4rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--white-color);
 }
